@@ -19,7 +19,7 @@ public class logintest extends basetest {
 
 		// Login
 		loginpage.login("poonamsonnur@gmail.com", "Poonam@123");
-
+		Thread.sleep(500);
 		// Select Women
 		loginpage.SelectWomen();
 		Thread.sleep(500);

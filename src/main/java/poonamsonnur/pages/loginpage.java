@@ -6,7 +6,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import poonamsonnur.commoncomponents.CommonMethods;
+
+import java.time.Duration;
 
 public class loginpage {
 
@@ -20,7 +24,8 @@ public class loginpage {
 		PageFactory.initElements(driver, this);
 	}
 
-	@FindBy(id = "userEmail")
+
+	@FindBy(xpath = "//input[@formcontrolname='userEmail']")
 	WebElement email;
 
 	@FindBy(id = "userPassword")
@@ -47,6 +52,8 @@ public class loginpage {
 
 	public void SelectWomen() {
 		commonMethods.scrollToDown();
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		wait.until(ExpectedConditions.elementToBeClickable(womencheck));
 		womencheck.click();
 	}
 }

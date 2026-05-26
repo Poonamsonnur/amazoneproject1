@@ -2,6 +2,7 @@ package testcomponents;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
@@ -30,7 +31,7 @@ public class basetest {
 		if (browser.equalsIgnoreCase("chrome")) {
 			driver = new ChromeDriver();   // ✅ FIXED LINE
 		}
-
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		driver.manage().window().maximize();
 		driver.get("https://rahulshettyacademy.com/client/#/auth/login");
 	}
