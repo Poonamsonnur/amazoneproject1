@@ -6,7 +6,7 @@
       <class name="testcases.logintest">
         <methods>
           <include name="launchApp"/>
-          <include name="ValidLogin"/>
+          <include name="ValidLoginAndSelectWomenAndLogout"/>
         </methods>
       </class> <!-- testcases.logintest -->
     </classes>

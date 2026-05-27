@@ -1,5 +1,6 @@
 package poonamsonnur.pages;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -37,8 +38,9 @@ public class loginpage {
 	@FindBy(xpath = "//button[normalize-space()='Sign Out']")
 	WebElement signout;
 
-	@FindBy(xpath = "(//div[@class='py-2 ml-3']//input)[2]")
-	WebElement womencheck;
+	@FindBy(xpath = "//body[1]/app-root[1]/app-dashboard[1]/section[1]/form[1]/div[3]/div[2]/input[1]")
+	WebElement fashioncheck;
+	
 
 	public void login(String email1, String pwd) {
 		email.sendKeys(email1);
@@ -50,10 +52,15 @@ public class loginpage {
 		signout.click();
 	}
 
-	public void SelectWomen() {
-		commonMethods.scrollToDown();
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		wait.until(ExpectedConditions.elementToBeClickable(womencheck));
-		womencheck.click();
+	public void Selectfashion() {
+		//commonMethods.scrollToDown();
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		wait.until(ExpectedConditions.elementToBeClickable(fashioncheck));		
+		fashioncheck.click();
+	}
+
+	public void GoTo() {
+		// TODO Auto-generated method stub
+		driver.get("https://rahulshettyacademy.com/client/#/dashboard/dash");
 	}
 }
