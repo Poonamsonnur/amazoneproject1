@@ -6,41 +6,66 @@ import java.time.Duration;
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+import poonamsonnur.commoncomponents.CommonMethods;
+import poonamsonnur.pages.loginpage;
 
 public class basetest {
-
+	
 	public WebDriver driver;
-	public Properties prop;
+	// this will have driver initialized, teaup , teardown
+	
+ public WebDriver driverInitialization() throws IOException {
+	 
+	 Properties prop = new Properties();
+	 FileInputStream fis = new FileInputStream(System.getProperty("user.dir")+"//src//main//java/poonamsonnur//resources//GlobalData.properties");
+	 
+	 prop.load(fis);
+	 String browsername = prop.getProperty("browser");
+	 
+	 if (browsername.equalsIgnoreCase("chrome")) {
+		 
+	 WebDriverManager.chromedriver().setup();
+	 driver = new ChromeDriver();
+	
+	 }
+	 else if (browsername.equalsIgnoreCase("Firfox")) {
+		 //firefox driver setup
+		 
+	  }
+	 else if (browsername.equalsIgnoreCase("edge")) {
+		 //edge driver setup
+		 
+	  }
+	 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+	 driver.manage().window().maximize(); 
+	 
+	 return driver;
+	 
+ }
+ 
+ @BeforeTest
+ public poonamsonnur.pages.loginpage launchApp() throws IOException {
+	 
+	 driver = driverInitialization();
+	 loginpage  loginpage = new loginpage(driver);
+	
+	  loginpage.GoTo();
+	  return loginpage;
 
-	@BeforeMethod
-	public void initializeDriver() throws IOException {
+	 
+ }
+ 
+ @AfterTest
+ public void teardown() {
+	 driver.quit();
+ }
+ 
+ 
 
-		prop = new Properties();
-
-		FileInputStream fis = new FileInputStream(
-				System.getProperty("user.dir") + "/src/test/resources/global.properties");
-
-		prop.load(fis);
-
-		String browser = prop.getProperty("browser").trim();
-
-		if (browser.equalsIgnoreCase("chrome")) {
-			driver = new ChromeDriver();   // ✅ FIXED LINE
-		}
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		driver.manage().window().maximize();
-		driver.get("https://rahulshettyacademy.com/client/#/auth/login");
-	}
-
-	@AfterMethod
-	public void tearDown() {
-
-		if (driver != null) {
-			driver.quit();
-		}
-	}
 }
